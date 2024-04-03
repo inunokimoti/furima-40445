@@ -44,7 +44,7 @@ has_one :order
 
 ### Association
 belongs_to :user
-has_one :item
+belongs_to :item
 has_one :address
 
 ## addressesテーブル
@@ -57,6 +57,7 @@ has_one :address
 |adderss_number        |string        |null: false                      |
 |adderss_bilding_name  |string        |                                 |
 |tel_number            |string        |null: false                      |
+|order                 |references    |null: false,foreign_key: true    |
 
 ### Association
 belongs_to :order
