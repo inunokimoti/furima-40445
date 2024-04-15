@@ -5,10 +5,10 @@ class OrderAddress
   with_options presence: true do
     validates :user_id
     validates :item_id
-    validates :post_code, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"}
+    validates :post_code, format: {with: /\A\d{3}[-]\d{4}\z/, message: "is invalid. Include hyphen(-)"}
     validates :adderss_city
     validates :adderss_number
-    validates :tel_number, format: {with: /\A[0-9]+$\z/, message: "input only number"}
+    validates :tel_number, format: {with: /\d{10,11}/, message: "input only number"}
   end
   validates :from_id, numericality: { other_than: 1 , message: "can't be blank"}
 
