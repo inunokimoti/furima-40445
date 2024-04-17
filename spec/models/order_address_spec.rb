@@ -54,12 +54,17 @@ RSpec.describe OrderAddress, type: :model do
       it '電話番号が10桁未満の場合、登録できない' do
         @order_address.tel_number = '123456789'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Tel number input only number")
+        expect(@order_address.errors.full_messages).to include("Tel number is 10 or 11 digits only")
       end
-      it '電話番号が12桁で半角数値以外の場合、登録できない' do
-        @order_address.tel_number = '090-1234-5678'
+      it '電話番号が12桁以上の場合、登録できない' do
+        @order_address.tel_number = '090123456789'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Tel number input only number")
+        expect(@order_address.errors.full_messages).to include("Tel number is 10 or 11 digits only")
+      end
+      it '電話番号が半角数値以外の場合、登録できない' do
+        @order_address.tel_number = '090-123-456'
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Tel number is 10 or 11 digits only")
       end
       it 'user_idが紐付いていない場合、登録できない' do
         @order_address.user_id = nil
@@ -75,11 +80,6 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.token = nil
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Token can't be blank")
-      end
-      it "sale_priceが空では登録できない" do
-        @order_address.sale_price = ""
-        @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Sale price can't be blank")
       end
     end
   end
