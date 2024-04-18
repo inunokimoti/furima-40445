@@ -57,7 +57,7 @@ class ItemsController < ApplicationController
   end
 
   def transition_bun3
-    unless @item.order == nil && @item.user_id != current_user.id
+    if @item.user_id == current_user.id && @item.order != nil
       redirect_to root_path
     end
   end
